@@ -10,6 +10,7 @@ build/
 local.properties
 apikey.properties
 /store
+
 # Log/OS Files
 *.log
 
