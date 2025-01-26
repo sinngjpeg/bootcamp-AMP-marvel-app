@@ -23,11 +23,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
         buildConfigField("String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY'])
         buildConfigField("String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY'])
         buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com/v1/public/"'
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -42,9 +43,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions{
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
     buildFeatures {
         viewBinding true
     }
+    buildToolsVersion '30.0.2'
 }
 
 
@@ -60,6 +67,9 @@ dependencies {
     // Material design
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation project(':testing')
+    androidTestImplementation project(':testing')
 
     // Navigation
     def nav_version = '2.5.2'
@@ -99,10 +109,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // Unit tests
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation(":testing")
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Instrumentation tests

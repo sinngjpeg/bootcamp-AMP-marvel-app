@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import com.example.core.domain.model.Character
 
+
 interface GetCharactersUseCase {
     operator fun invoke(params: GetCharacterParams): Flow<PagingData<Character>>
     data class GetCharacterParams(val query: String, val pagingConfig: PagingConfig)
@@ -19,9 +20,9 @@ class GetCharactersUseCaseImpl @Inject constructor(
 ) : PagingUseCase<GetCharactersUseCase.GetCharacterParams, Character>(),
     GetCharactersUseCase {
     override fun createFlowObservable(params: GetCharactersUseCase.GetCharacterParams): Flow<PagingData<Character>> {
+        val pagingSource = charactersRepository.getCharacters(params.query)
         return Pager(config = params.pagingConfig) {
-            // PagingSource
-            charactersRepository.getCharacters(params.query)
+            pagingSource
         }.flow
     }
 }
