@@ -11,8 +11,10 @@ import com.example.marvelapp.databinding.ItemCharacterBinding
 class CharactersViewHolder(
     itemCharacterBinding: ItemCharacterBinding
 ) : RecyclerView.ViewHolder(itemCharacterBinding.root) {
+
     private val textName = itemCharacterBinding.textName
     private val imageCharacter = itemCharacterBinding.imageCharacter
+
 
     fun bind(character: Character) {
         textName.text = character.name
@@ -21,6 +23,7 @@ class CharactersViewHolder(
             .fallback(R.drawable.ic_img_loading_error)
             .into(imageCharacter)
     }
+
     companion object {
         fun create(parent: ViewGroup): CharactersViewHolder {
             val inflater = LayoutInflater.from(parent.context)

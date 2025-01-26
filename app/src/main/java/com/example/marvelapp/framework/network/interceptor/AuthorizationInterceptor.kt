@@ -15,6 +15,7 @@ class AuthorizationInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val requestUrl = request.url
+
         val ts = (calendar.timeInMillis / 1000L).toString() // time in seconds
         val hash = "$ts$privateKey$publicKey".md5()
         val newUrl = requestUrl.newBuilder()
@@ -22,14 +23,16 @@ class AuthorizationInterceptor(
             .addQueryParameter(QUERY_PARAMETER_API_KEY, publicKey)
             .addQueryParameter(QUERY_PARAMETER_HASH, hash)
             .build()
+
         return chain.proceed(
             request.newBuilder()
                 .url(newUrl)
                 .build()
         )
+
     }
 
-    //converter hash to MD5 script
+    //converter hash to MD5 cript
     @Suppress("MagicNumber")
     private fun String.md5(): String {
         val md = MessageDigest.getInstance("MD5")

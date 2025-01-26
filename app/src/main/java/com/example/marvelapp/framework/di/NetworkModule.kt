@@ -1,8 +1,8 @@
 package com.example.marvelapp.framework.di
 
-import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
 import com.example.marvelapp.framework.network.MarvelApi
+import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,11 +11,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.Calendar
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,9 +27,7 @@ object NetworkModule {
             setLevel(
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
-                } else {
-                    HttpLoggingInterceptor.Level.NONE
-                }
+                } else HttpLoggingInterceptor.Level.NONE
             )
         }
     }
@@ -59,7 +55,12 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(
+    fun provideGsonConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @Provides
+    fun providesRetrofit(
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
     ): MarvelApi {
@@ -70,4 +71,5 @@ object NetworkModule {
             .build()
             .create(MarvelApi::class.java)
     }
+
 }
