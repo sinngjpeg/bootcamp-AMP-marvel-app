@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
     id 'kotlin-android'
 }
+
 
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
@@ -18,12 +20,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\ingri\\Projetos\\bootcamp-android-moderno-kotlin\\store\\marvel_app_key_store')
+            storeFile file('$rootDir/store/marvel_app_key_store.jks')
             storePassword 'marvel@123'
             keyAlias 'marvel-app'
             keyPassword 'marvel@123'
         }
     }
+
 
     defaultConfig {
         applicationId "com.example.marvelapp"
@@ -50,11 +53,10 @@ android {
             minifyEnabled true
             applicationIdSuffix '.staging'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
-            'proguard-rules-staging.pro'
+                    'proguard-rules-staging.pro'
 
         }
         release {
-//            signingConfig signingConfig.release
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -131,6 +133,11 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Unit tests
     testImplementation(":testing")
