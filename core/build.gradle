@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'kotlin'
 }
 
 java {
@@ -9,6 +9,7 @@ java {
 }
 
 dependencies {
+
     // OkHttp
     api(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
     api("com.squareup.okhttp3:okhttp")
@@ -22,13 +23,13 @@ dependencies {
     //Gson
     api 'com.google.code.gson:gson:2.9.0'
 
-    // Paging3 Common
+    //Paging3 Common
     implementation "androidx.paging:paging-common:$paging_version"
 
-    // Java Inject
+    // Javax Inject
     implementation "javax.inject:javax.inject:1"
 
-    // Coroutines core
+    // Coroutines Core
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
     // Unit Tests

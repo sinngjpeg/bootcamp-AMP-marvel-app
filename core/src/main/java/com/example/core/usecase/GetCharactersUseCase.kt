@@ -4,10 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core.data.repository.CharactersRepository
-import com.example.core.domain.model.Character
 import com.example.core.usecase.base.PagingUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import com.example.core.domain.model.Character
+
 
 interface GetCharactersUseCase {
     operator fun invoke(params: GetCharacterParams): Flow<PagingData<Character>>

@@ -9,5 +9,5 @@ interface MarvelApi {
     suspend fun getCharacters(
         @QueryMap
         queries: Map<String, String>
-    ): DataWrapperResponse
+    ) : DataWrapperResponse
 }
