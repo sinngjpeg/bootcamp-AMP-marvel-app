@@ -18,12 +18,22 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 android {
     compileSdkVersion 33
 
+//    signingConfigs {
+//        release {
+//            storeFile file('C:/Users/ingri/Projetos/bootcamp-android-moderno-kotlin/store/marvel_app_key_store')
+//            storePassword 'marvel@123'
+//            keyAlias 'marvel-app'
+//            keyPassword 'marvel@123'
+//        }
+//    }
+
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\ingri\\Projetos\\bootcamp-android-moderno-kotlin\\store\\marvel_app_key_store')
-            storePassword 'marvel@123'
-            keyAlias 'marvel-app'
-            keyPassword 'marvel@123'
+            // Puxa as variáveis de ambiente configuradas no Bitrise
+            storeFile file(System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL"))
+            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
         }
     }
 
@@ -137,7 +147,7 @@ dependencies {
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
-     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Unit tests
     testImplementation(":testing")
