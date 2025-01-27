@@ -18,24 +18,15 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 android {
     compileSdkVersion 33
 
-//    signingConfigs {
-//        release {
-//            storeFile file('C:/Users/ingri/Projetos/bootcamp-android-moderno-kotlin/store/marvel_app_key_store')
-//            storePassword 'marvel@123'
-//            keyAlias 'marvel-app'
-//            keyPassword 'marvel@123'
-//        }
-//    }
-
     signingConfigs {
         release {
-            // Puxa as variáveis de ambiente configuradas no Bitrise
-            storeFile file(System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL"))
-            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
-            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            storeFile file('/Users/ingri/Projetos/curso-android-marvel-app/store/marvel_app_key_store')
+            storePassword 'marvel@123'
+            keyAlias 'marvel-app'
+            keyPassword 'marvel@123'
         }
     }
+
 
     defaultConfig {
         applicationId "com.example.marvelapp"
@@ -66,7 +57,6 @@ android {
 
         }
         release {
-//            signingConfig signingConfig.release
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
