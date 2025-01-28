@@ -2,6 +2,7 @@ package com.example.marvelapp.framework.paging
 
 import androidx.paging.PagingSource
 import com.example.core.data.repository.CharactersRemoteDataSource
+import com.example.core.domain.model.Character
 import com.example.marvelapp.factory.response.DataWrapperResponseFactory
 import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import com.example.testing.MainCoroutineRule
@@ -17,8 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import com.example.core.domain.model.Character
-
+import java.lang.RuntimeException
 
 @RunWith(MockitoJUnitRunner::class)
 class CharactersPagingSourceTest {
@@ -60,7 +60,7 @@ class CharactersPagingSourceTest {
         // Assert
         val expected = listOf(
             characterFactory.create(CharacterFactory.Hero.ThreeDMan),
-            characterFactory.create(CharacterFactory.Hero.Abomb),
+            characterFactory.create(CharacterFactory.Hero.ABomb),
         )
 
         assertEquals(

@@ -35,7 +35,7 @@ class CharactersViewModelTest {
     private val pagingDataCharacters = PagingData.from(
         listOf(
             charactersFactory.create(CharacterFactory.Hero.ThreeDMan),
-            charactersFactory.create(CharacterFactory.Hero.Abomb)
+            charactersFactory.create(CharacterFactory.Hero.ABomb)
         )
     )
 
