@@ -76,8 +76,8 @@ android {
     buildFeatures {
         viewBinding true
     }
-    buildToolsVersion '30.0.2'
-//    buildToolsVersion '30.0.2'
+    namespace 'com.example.marvelapp'
+    //    buildToolsVersion '30.0.2'
 }
 
 dependencies {
