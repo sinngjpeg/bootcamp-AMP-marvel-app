@@ -40,11 +40,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-//tasks.withType(Test) {
-//    ignoreFailures = true
-//    reports {
-//        junitXml.enabled = true // Habilitar relatório XML
-//        html.enabled = true     // Habilitar relatório HTML
-//    }
-//}
