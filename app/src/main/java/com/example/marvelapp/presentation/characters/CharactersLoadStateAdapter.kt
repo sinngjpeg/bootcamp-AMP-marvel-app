@@ -13,7 +13,6 @@ class CharactersLoadStateAdapter(
         loadState: LoadState
     ) = CharactersLoadMoreStateViewHolder.create(parent, retry)
 
-
     override fun onBindViewHolder(
         holder: CharactersLoadMoreStateViewHolder,
         loadState: LoadState

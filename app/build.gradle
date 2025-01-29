@@ -17,6 +17,7 @@ apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdkVersion 33
+    buildToolsVersion "30.0.3"
 
     signingConfigs {
         release {
@@ -35,6 +36,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.example.marvelapp.CustomTestRunner"
+
         // The following argument makes the Android Test Orchestrator run its
         // "pm clear" command after each test invocation. This command ensures
         // that the app's state is completely cleared between tests.
@@ -67,7 +69,6 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
         }
     }
 
@@ -84,13 +85,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+
     namespace 'com.example.marvelapp'
     //    buildToolsVersion '30.0.2'
 }
 
-
 dependencies {
-
     implementation project(':core')
 
     // AndroidX
@@ -101,9 +101,6 @@ dependencies {
     // Material design
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
 
     // Navigation
     def nav_version = '2.5.2'
@@ -139,16 +136,14 @@ dependencies {
 
     // Other Libs
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Unit tests
-    testImplementation(":testing")
+    testImplementation project(":testing")
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Instrumentation tests
@@ -169,5 +164,4 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
-
 }

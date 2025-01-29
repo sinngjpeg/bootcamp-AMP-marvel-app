@@ -9,9 +9,8 @@ sealed class ResultStatus<out T> {
     override fun toString(): String {
         return when (this) {
             Loading -> "Loading"
-            is Success<*> -> "Success [data=$data]"
+            is Success<*> -> "Success[data=$data]"
             is Error -> "Error[throwable=$throwable]"
         }
     }
-
 }

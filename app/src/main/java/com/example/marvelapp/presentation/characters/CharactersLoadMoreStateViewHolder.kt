@@ -13,25 +13,23 @@ class CharactersLoadMoreStateViewHolder(
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
     private val binding = ItemCharacterLoadMoreStateBinding.bind(itemView)
-    private val progressBarLoadingMore = binding.progressLoadMore
+    private val progressBarLoadingMore = binding.progressLoadingMore
     private val textTryAgainMessage = binding.textTryAgain.also {
         it.setOnClickListener {
             retry()
         }
     }
 
-    fun bind(loadState: LoadState) {
-        progressBarLoadingMore.isVisible = loadState is LoadState.Loading
-        textTryAgainMessage.isVisible = loadState is LoadState.Error
+    fun bind(loadSate: LoadState) {
+        progressBarLoadingMore.isVisible = loadSate is LoadState.Loading
+        textTryAgainMessage.isVisible = loadSate is LoadState.Error
     }
 
     companion object {
         fun create(parent: ViewGroup, retry: () -> Unit): CharactersLoadMoreStateViewHolder {
-            val itemBinding = ItemCharacterLoadMoreStateBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            val itemBinding = ItemCharacterLoadMoreStateBinding
+                .inflate(LayoutInflater.from(parent.context), parent, false)
+
             return CharactersLoadMoreStateViewHolder(itemBinding, retry)
         }
     }

@@ -8,25 +8,30 @@ import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import com.example.marvelapp.framework.network.response.toCharacterModel
 
 class CharactersPagingSource(
-    private val remoteDataSource: CharactersRemoteDataSource<DataWrapperResponse>,
+    private val remoteDataSource: CharactersRemoteDataSource,
     private val query: String
 ) : PagingSource<Int, Character>() {
+
     @Suppress("TooGenericExceptionCaught")
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         return try {
             val offset = params.key ?: 0
+
             val queries = hashMapOf(
                 "offset" to offset.toString()
             )
+
             if (query.isNotEmpty()) {
                 queries["nameStartsWith"] = query
             }
 
-            val response = remoteDataSource.fetchCharacters(queries)
-            val responseOffset = response.data.offset
-            val totalCharacters = response.data.total
+            val characterPaging = remoteDataSource.fetchCharacters(queries)
+
+            val responseOffset = characterPaging.offset
+            val totalCharacters = characterPaging.total
+
             LoadResult.Page(
-                data = response.data.results.map { it.toCharacterModel() },
+                data = characterPaging.characters,
                 prevKey = null,
                 nextKey = if (responseOffset < totalCharacters) {
                     responseOffset + LIMIT

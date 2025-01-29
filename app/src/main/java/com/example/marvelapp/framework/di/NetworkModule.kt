@@ -24,7 +24,7 @@ object NetworkModule {
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
+        return HttpLoggingInterceptor().apply{
             setLevel(
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
@@ -61,7 +61,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun providesRetrofit(
+    fun provideRetrofit(
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory,
         @BaseUrl baseUrl: String
@@ -73,5 +73,4 @@ object NetworkModule {
             .build()
             .create(MarvelApi::class.java)
     }
-
 }

@@ -13,11 +13,12 @@ import com.example.core.domain.model.Character
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val getCharacterUseCase: GetCharactersUseCase
+    private val getCharactersUseCase: GetCharactersUseCase
 ) : ViewModel() {
+
     fun charactersPagingData(query: String): Flow<PagingData<Character>> {
-        return getCharacterUseCase.invoke(
-            GetCharactersUseCase.GetCharacterParams(query, getPageConfig())
+        return getCharactersUseCase(
+            GetCharactersUseCase.GetCharactersParams(query, getPageConfig())
         ).cachedIn(viewModelScope)
     }
 
