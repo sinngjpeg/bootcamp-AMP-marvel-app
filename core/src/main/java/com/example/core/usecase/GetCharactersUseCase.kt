@@ -11,15 +11,17 @@ import com.example.core.domain.model.Character
 
 
 interface GetCharactersUseCase {
-    operator fun invoke(params: GetCharacterParams): Flow<PagingData<Character>>
-    data class GetCharacterParams(val query: String, val pagingConfig: PagingConfig)
+    operator fun invoke(params: GetCharactersParams): Flow<PagingData<Character>>
+
+    data class GetCharactersParams(val query: String, val pagingConfig: PagingConfig)
 }
 
 class GetCharactersUseCaseImpl @Inject constructor(
     private val charactersRepository: CharactersRepository
-) : PagingUseCase<GetCharactersUseCase.GetCharacterParams, Character>(),
+) : PagingUseCase<GetCharactersUseCase.GetCharactersParams, Character>(),
     GetCharactersUseCase {
-    override fun createFlowObservable(params: GetCharactersUseCase.GetCharacterParams): Flow<PagingData<Character>> {
+
+    override fun createFlowObservable(params: GetCharactersUseCase.GetCharactersParams): Flow<PagingData<Character>> {
         val pagingSource = charactersRepository.getCharacters(params.query)
         return Pager(config = params.pagingConfig) {
             pagingSource
